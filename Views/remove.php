@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/skeleton.css">
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/remove.css">
+    <link rel="stylesheet" href="../css/footer.css">
 </head>
 <body>
 
@@ -31,5 +32,6 @@
         </div>
     </div>
 
-</body>
-</html>
+<?php
+
+include ('footer.php');

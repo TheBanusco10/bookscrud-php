@@ -3,8 +3,40 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ae33d1e-8fb5-4280-b2a0-b2303b580ab0" name="Default Changelist" comment="" />
+    <list default="true" id="2ae33d1e-8fb5-4280-b2a0-b2303b580ab0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Views/new.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Views/show.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/css/footer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/DB.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/DB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/booksList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/booksList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/remove.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/remove.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/estilos.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,7 +45,11 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1m1OakNOFbWL2FKQeJ49uRGKMvK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -50,21 +86,41 @@
       <updated>1608657695948</updated>
       <workItem from="1608657697071" duration="5264000" />
       <workItem from="1608734755866" duration="4715000" />
-      <workItem from="1608800450769" duration="5399000" />
+      <workItem from="1608800450769" duration="6173000" />
+      <workItem from="1608821404076" duration="7091000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
+    <state x="538" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1608824576074">
+      <screen x="0" y="0" width="1600" height="862" />
+    </state>
+    <state x="538" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1600.862@0.0.1600.862" timestamp="1608824576074" />
     <state x="588" y="188" key="FileChooserDialogImpl" timestamp="1608800446212">
       <screen x="0" y="0" width="1600" height="862" />
     </state>
     <state x="588" y="188" key="FileChooserDialogImpl/0.0.1600.862@0.0.1600.862" timestamp="1608800446212" />
-    <state x="463" y="182" width="672" height="678" key="search.everywhere.popup" timestamp="1608805360207">
+    <state x="620" y="357" width="349" height="149" key="NewPhpFileDialog" timestamp="1608824395665">
       <screen x="0" y="0" width="1600" height="862" />
     </state>
-    <state x="463" y="182" width="672" height="678" key="search.everywhere.popup/0.0.1600.862@0.0.1600.862" timestamp="1608805360207" />
+    <state x="620" y="357" width="349" height="149" key="NewPhpFileDialog/0.0.1600.862@0.0.1600.862" timestamp="1608824395665" />
+    <state x="463" y="182" width="672" height="678" key="search.everywhere.popup" timestamp="1608824389980">
+      <screen x="0" y="0" width="1600" height="862" />
+    </state>
+    <state x="463" y="182" width="672" height="678" key="search.everywhere.popup/0.0.1600.862@0.0.1600.862" timestamp="1608824389980" />
   </component>
 </project>

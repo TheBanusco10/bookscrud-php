@@ -27,7 +27,7 @@ class Controller
         }else if ($id && !$operation) {
             die('Operation is missing');
 
-        }else if (!$id && $operation) {
+        }else if (!$id && $operation && $operation != 'new') {
             die('Id is missing');
         }
 
@@ -38,6 +38,14 @@ class Controller
 
             case 'remove':
                 $this->removeBook($id);
+                break;
+
+            case 'show':
+                $this->showBook($id);
+                break;
+
+            case 'new':
+                $this->newBook();
                 break;
 
         }
@@ -55,7 +63,6 @@ class Controller
                 $_POST['publisher'], $_POST['pages']);
 
             $this->model->editBook($bookEdited);
-            //setcookie('success', 'Book edited', time() + 3600);
             $_SESSION['success'] = 'Book edited';
             $_SESSION['class'] = 'success';
             $this->redirect('index.php');
@@ -90,6 +97,41 @@ class Controller
         }
 
         include $_SERVER['DOCUMENT_ROOT'] . '/Views/remove.php';
+    }
+
+    public function showBook($id) {
+
+        $book = $this->model->getBookByID($id);
+
+        if (isset($_POST['cancel']))
+            $this->redirect('index.php');
+
+        include ('Views/show.php');
+
+    }
+
+    public function newBook() {
+
+        session_start();
+
+        if (isset($_POST['add'])) {
+            $newBook = new Book(1, $_POST['isbn'], $_POST['title'], $_POST['author'],
+                $_POST['publisher'], $_POST['pages']);
+
+            $this->model->insertBook($newBook);
+            $_SESSION['success'] = 'Book added';
+            $_SESSION['class'] = 'success';
+            $this->redirect('index.php');
+            return;
+
+        }else if (isset($_POST['cancel'])) {
+
+            $this->redirect('index.php');
+            return;
+        }
+
+        include $_SERVER['DOCUMENT_ROOT'] . '/Views/new.php';
+
     }
 
     public function redirect($page) {

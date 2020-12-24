@@ -2,6 +2,24 @@ h1, h3 {
 
     margin-top: 15px;
 
+    text-align: center;
+
+}
+
+#info {
+
+    border-bottom: 1px solid #1EAEDB;
+    border-top: 1px solid #1EAEDB;
+
+    border-radius: 3px;
+
+    padding: 10px;
+
+    margin-bottom: 10px;
+}
+
+.new {
+    text-align: center;
 }
 
 .success {

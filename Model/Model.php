@@ -14,9 +14,19 @@ class Model {
     {
         $pdo = DB::connect();
 
-        $stmt = $pdo->query("Select * from books LIMIT 3");
+        $stmt = $pdo->query("Select * from books ORDER BY id DESC LIMIT 10");
+        $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        if ($stmt->rowCount() != 0) {
+
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        }else {
+            return null;
+        }
+
+
+
     }
 
 
@@ -61,6 +71,22 @@ class Model {
 
         $stmt->execute(array(
             ':id'=>htmlspecialchars($id)
+        ));
+
+    }
+
+    public function insertBook(Book $book) {
+
+        $pdo = DB::connect();
+
+        $stmt = $pdo->prepare("INSERT INTO books VALUES (NULL, :isbn, :title, :author, :publisher, :pages)");
+
+        $stmt->execute(array(
+            ':isbn'=>htmlspecialchars($book->getIsbn()),
+            ':title'=>htmlspecialchars($book->getTitle()),
+            ':author'=>htmlspecialchars($book->getAuthor()),
+            ':publisher'=>htmlspecialchars($book->getPublisher()),
+            ':pages'=>htmlspecialchars($book->getPages())
         ));
 
     }
