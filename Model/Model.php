@@ -1,0 +1,70 @@
+<?php
+
+require_once('DB.php');
+
+class Model {
+
+    private $books = [];
+    private $db;
+
+    /**
+     * @return array
+     */
+    public function getBooks()
+    {
+        $pdo = DB::connect();
+
+        $stmt = $pdo->query("Select * from books LIMIT 3");
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+
+    public function getBookByID($id) {
+
+        $pdo = DB::connect();
+
+        $stmt = $pdo->prepare("Select * from books WHERE id = :id");
+
+        $stmt->execute(array(
+           ':id'=>htmlentities($id)
+        ));
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+
+
+    }
+
+    public function editBook(Book $book) {
+
+        $pdo = DB::connect();
+
+        $stmt = $pdo->prepare("UPDATE books SET isbn = :isbn, title = :title, author = :author, publisher = :publisher,
+                                    pages = :pages WHERE id = :id LIMIT 1");
+
+        $stmt->execute(array(
+            ':isbn'=>htmlspecialchars($book->getIsbn()),
+            ':title'=>htmlspecialchars($book->getTitle()),
+            ':author'=>htmlspecialchars($book->getAuthor()),
+            ':publisher'=>htmlspecialchars($book->getPublisher()),
+            ':pages'=>htmlspecialchars($book->getPages()),
+            ':id'=>htmlspecialchars($book->getId())
+        ));
+
+    }
+
+    public function removeBook($id) {
+
+        $pdo = DB::connect();
+
+        $stmt = $pdo->prepare("DELETE FROM books WHERE id = :id LIMIT 1");
+
+        $stmt->execute(array(
+            ':id'=>htmlspecialchars($id)
+        ));
+
+    }
+
+
+
+}

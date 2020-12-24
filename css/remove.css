@@ -1,0 +1,35 @@
+form {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    flex-flow: column;
+
+    border-bottom: 2px solid #db1e1e;
+
+    padding: 20px;
+
+    border-radius: 3px;
+
+    transition: all 0.3s linear;
+}
+
+form:hover {
+
+    background-color: #D1D1D1;
+    border-bottom: 2px solid #1EAEDB;
+
+}
+
+div {
+
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+}
+
+input {
+    margin-right: 5px;
+}

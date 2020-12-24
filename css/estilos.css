@@ -1,0 +1,25 @@
+h1, h3 {
+
+    margin-top: 15px;
+
+}
+
+.success {
+    color: limegreen;
+}
+
+.button-danger {
+
+    color: #FFF !important;
+    background-color: #db1e1e !important;
+    border-color: #db1e1e !important;
+
+}
+
+.button-danger:hover {
+
+    color: #FFF !important;
+    background-color: #c11919 !important;
+    border-color: #c11919 !important;
+
+}
