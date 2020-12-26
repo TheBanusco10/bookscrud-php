@@ -9,6 +9,8 @@ if (isset($_SESSION['success'])) {
     unset($_SESSION['class']);
 }
 
+$columns = ['isbn', 'title', 'author', 'publisher', 'pages'];
+
 ?>
 
 <!doctype html>
@@ -35,6 +37,28 @@ if (isset($_SESSION['success'])) {
     <div class="row">
         <p class="new"><a href="index.php?op=new"><i class="fas fa-plus-circle"></i> Add a new book</a></p>
     </div>
+    <div class="row" id="order">
+        <h4>Order type</h4>
+        <form method="GET">
+             <?php
+
+             echo "<select name='columnOrder'>";
+             foreach ($columns as $column) {
+
+                 echo "<option value='$column'>$column</option>";
+
+             }
+             echo "</select>";
+             ?>
+
+            <select name="orderOption">
+                <option value="ASC">ASC</option>
+                <option value="DESC">DESC</option>
+            </select>
+
+            <input type="submit" name="order" value="Order">
+        </form>
+    </div>
     <div class="row">
         <h5 class="<?= $class?>"><?= $message?></h5>
 
@@ -54,8 +78,8 @@ if (isset($_SESSION['success'])) {
                 <table class="u-full-width">
                     <thead>
                     <tr>
-                        <th>ISBN</th>
-                        <th>Título</th>
+                        <th>ISBN</a></th>
+                        <th>Título</a></th>
                         <th>Autor</th>
                         <th>Editorial</th>
                         <th>Páginas</th>
@@ -87,6 +111,13 @@ if (isset($_SESSION['success'])) {
             }
 
             ?>
+    </div>
+
+    <div class="row">
+<!--        <a href="index.php?op=pdf" class="button-primary">Generate PDF</a>-->
+        <form action="../Views/generatePDF.php">
+            <button type="submit" name="generatePDF">Generate</button>
+        </form>
     </div>
 </div>
 

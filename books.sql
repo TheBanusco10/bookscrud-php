@@ -1,5 +1,5 @@
 create table books (
-	id INT,
+	id INT AUTO_INCREMENT PRIMARY KEY,
 	isbn VARCHAR(50),
 	title TEXT,
 	author VARCHAR(50),

@@ -21,14 +21,25 @@ class Controller
         $id = $_GET['id'] ?? null;
 
         if (!$operation && !$id) {
-            $books = $this->model->getBooks();
+
+            if (isset($_GET['order'])) {
+
+                $columnOrder = $_GET['columnOrder'] ?? 'title';
+                $orderOption = $_GET['orderOption'] ?? 'ASC';
+                $books = $this->model->getBooks($columnOrder, $orderOption);
+
+            }else
+                $books = $this->model->getBooks();
+
             include ('Views/booksList.php');
 
         }else if ($id && !$operation) {
             die('Operation is missing');
 
-        }else if (!$id && $operation && $operation != 'new') {
-            die('Id is missing');
+        }else if (!$id && $operation) {
+
+            if ($operation != 'new' && $operation != 'pdf')
+                die('Id is missing');
         }
 
         switch ($operation) {
@@ -48,6 +59,9 @@ class Controller
                 $this->newBook();
                 break;
 
+            case 'pdf':
+                $this->generatePDF();
+                break;
         }
 
     }
@@ -132,6 +146,17 @@ class Controller
 
         include $_SERVER['DOCUMENT_ROOT'] . '/Views/new.php';
 
+    }
+
+    public function generatePDF() {
+        require ('Model/PDF.php');
+
+        $pdf = new PDF();
+        $pdf->AddPage();
+
+        // First table: output all columns
+        $pdf->Table(DB::connect(), 'select * from books LIMIT 5;');
+        $pdf->AddPage();
     }
 
     public function redirect($page) {
