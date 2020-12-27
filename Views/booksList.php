@@ -9,7 +9,7 @@ if (isset($_SESSION['success'])) {
     unset($_SESSION['class']);
 }
 
-$columns = ['isbn', 'title', 'author', 'publisher', 'pages'];
+$columns = ['id', 'isbn', 'title', 'author', 'publisher', 'pages'];
 
 ?>
 
@@ -78,8 +78,9 @@ $columns = ['isbn', 'title', 'author', 'publisher', 'pages'];
                 <table class="u-full-width">
                     <thead>
                     <tr>
-                        <th>ISBN</a></th>
-                        <th>Título</a></th>
+                        <th>ID</th>
+                        <th>ISBN</th>
+                        <th>Título</th>
                         <th>Autor</th>
                         <th>Editorial</th>
                         <th>Páginas</th>
@@ -92,6 +93,7 @@ $columns = ['isbn', 'title', 'author', 'publisher', 'pages'];
                     foreach ($books as $book) {
                         echo "<tr>";
 
+                        echo "<td>$book->id</td>";
                         echo "<td>$book->isbn</td>";
                         echo "<td>$book->title</td>";
                         echo "<td>$book->author</td>";
@@ -111,6 +113,28 @@ $columns = ['isbn', 'title', 'author', 'publisher', 'pages'];
             }
 
             ?>
+        <section class="page">
+            <p>
+
+                <?php
+                if ($page > 1) {
+
+                    echo "<a href='?columnOrder=$columnOrder&orderOption=$orderOption&order=Order&page=1'>First</a>";
+                    echo " <a href='?columnOrder=$columnOrder&orderOption=$orderOption&order=Order&page=$previous_page'>Previous</a>";
+
+                }
+
+                else
+                    echo "";
+                ?>
+
+                | Page <?= $page ?> of <?= $total_number_books?> |
+
+<!--                TODO Si es la última página ocultar estas opciones-->
+                <a href="?columnOrder=<?= $columnOrder?>&orderOption=<?= $orderOption?>&order=Order&page=<?= $next_page?>">Next</a>
+                <a href="?columnOrder=<?= $columnOrder?>&orderOption=<?= $orderOption?>&order=Order&page=<?= $total_number_books?>">Last</a>
+            </p>
+        </section>
     </div>
 
     <div class="row">

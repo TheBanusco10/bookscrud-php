@@ -5,6 +5,7 @@ require_once ('Model/Book.php');
 class Controller
 {
     private $model;
+    private $maxRows = 10;
 
     /**
      * Controller constructor.
@@ -19,17 +20,34 @@ class Controller
 
         $operation = $_GET['op'] ?? null;
         $id = $_GET['id'] ?? null;
+        $page = $_GET['page'] ?? 1;
 
         if (!$operation && !$id) {
 
+            $offset = ($page-1) * $this->maxRows;
+            $previous_page = $page - 1;
+            $next_page = $page + 1;
+
+            $pdo = DB::connect();
+
+            $stmt = $pdo->query("SELECT COUNT(*) As total_records FROM books");
+
+            $total_number_books = ceil($stmt->fetch(5)->total_records / $this->maxRows);
+
+            $columnOrder = $_GET['columnOrder'] ?? 'id';
+            $orderOption = $_GET['orderOption'] ?? 'ASC';
+
             if (isset($_GET['order'])) {
 
-                $columnOrder = $_GET['columnOrder'] ?? 'title';
-                $orderOption = $_GET['orderOption'] ?? 'ASC';
-                $books = $this->model->getBooks($columnOrder, $orderOption);
+                $columnOrder = $_GET['columnOrder'];
+                $orderOption = $_GET['orderOption'];
+            }
 
-            }else
-                $books = $this->model->getBooks();
+            //  TODO crear php para mostrar errores
+            if ($page <= 0)
+                die ('Page must be 1 or greater');
+
+            $books = $this->model->getBooks($offset, $this->maxRows, $columnOrder, $orderOption);
 
             include ('Views/booksList.php');
 
@@ -148,7 +166,11 @@ class Controller
 
     }
 
+    //  TODO Añadir al PDF la página del usuario y el orden
     public function generatePDF() {
+        $columnOrder = $_GET['columnOrder'] ?? 'title';
+        $orderOption = $_GET['orderOption'] ?? 'ASC';
+
         include $_SERVER['DOCUMENT_ROOT'] . '/Views/generatePDF.php';
     }
 

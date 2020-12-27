@@ -10,14 +10,14 @@ class Model {
     /**
      * @return array
      */
-    public function getBooks($order = 'title', $type = 'ASC')
+    public function getBooks($offset, $maxRow, $order = 'title', $type = 'ASC')
     {
         $pdo = DB::connect();
 
         $order = htmlentities($order);
         $type = htmlentities($type);
 
-        $stmt = $pdo->query("Select * from books ORDER BY $order $type LIMIT 10");
+        $stmt = $pdo->query("Select * from books ORDER BY $order $type LIMIT $offset, $maxRow");
         $stmt->execute();
 
         if ($stmt->rowCount() != 0) {
