@@ -19,18 +19,36 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:v.1" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ae33d1e-8fb5-4280-b2a0-b2303b580ab0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Model/PDF.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Views/generatePDF.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controller/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/mysql_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/Model/mysql_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/booksList.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/booksList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books.sql" beforeDir="false" afterPath="$PROJECT_DIR$/books.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/estilos.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/estilos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/generatePDF.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/generatePDF.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/courier.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/courierb.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/courierbi.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/courieri.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/helvetica.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/helveticab.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/helveticabi.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/helveticai.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/symbol.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/times.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/timesb.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/timesbi.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/timesi.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/font/zapfdingbats.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fpdf.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +57,9 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="Git.Pull.Settings">
+    <option name="BRANCH" value="master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

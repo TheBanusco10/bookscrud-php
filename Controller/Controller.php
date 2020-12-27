@@ -149,14 +149,7 @@ class Controller
     }
 
     public function generatePDF() {
-        require ('Model/PDF.php');
-
-        $pdf = new PDF();
-        $pdf->AddPage();
-
-        // First table: output all columns
-        $pdf->Table(DB::connect(), 'select * from books LIMIT 5;');
-        $pdf->AddPage();
+        include $_SERVER['DOCUMENT_ROOT'] . '/Views/generatePDF.php';
     }
 
     public function redirect($page) {

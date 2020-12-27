@@ -114,10 +114,10 @@ $columns = ['isbn', 'title', 'author', 'publisher', 'pages'];
     </div>
 
     <div class="row">
-<!--        <a href="index.php?op=pdf" class="button-primary">Generate PDF</a>-->
-        <form action="../Views/generatePDF.php">
+        <a href="index.php?op=pdf" class="button-primary">Generate PDF</a>
+        <!--<form action="../Views/generatePDF.php">
             <button type="submit" name="generatePDF">Generate</button>
-        </form>
+        </form>-->
     </div>
 </div>
 

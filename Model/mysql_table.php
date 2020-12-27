@@ -11,7 +11,9 @@
  * Desarrollo Web en Entorno Servidor 2º DAW
  * Rafael García Cabrera
  */
-require_once 'fpdf.php';
+
+require ('vendor/autoload.php');
+use Fpdf\Fpdf;
 
 class PDF_MySQL_Table extends FPDF
 {
