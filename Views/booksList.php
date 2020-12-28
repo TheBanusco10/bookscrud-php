@@ -119,8 +119,8 @@ $columns = ['id', 'isbn', 'title', 'author', 'publisher', 'pages'];
                 <?php
                 if ($page > 1) {
 
-                    echo "<a href='?columnOrder=$columnOrder&orderOption=$orderOption&order=Order&page=1'>First</a>";
-                    echo " <a href='?columnOrder=$columnOrder&orderOption=$orderOption&order=Order&page=$previous_page'>Previous</a>";
+                    echo "<a href='?columnOrder=$columnOrder&orderOption=$orderOption&page=1'>First</a>";
+                    echo " <a href='?columnOrder=$columnOrder&orderOption=$orderOption&page=$previous_page'>Previous</a>";
 
                 }
 
@@ -130,18 +130,27 @@ $columns = ['id', 'isbn', 'title', 'author', 'publisher', 'pages'];
 
                 | Page <?= $page ?> of <?= $total_number_books?> |
 
-<!--                TODO Si es la última página ocultar estas opciones-->
-                <a href="?columnOrder=<?= $columnOrder?>&orderOption=<?= $orderOption?>&order=Order&page=<?= $next_page?>">Next</a>
-                <a href="?columnOrder=<?= $columnOrder?>&orderOption=<?= $orderOption?>&order=Order&page=<?= $total_number_books?>">Last</a>
+                <?php
+
+                if ($page < $total_number_books) {
+                    echo "<a href='?columnOrder=$columnOrder&orderOption=$orderOption&page=$next_page'>Next</a>";
+                    echo " <a href='?columnOrder=$columnOrder&orderOption=$orderOption&page=$total_number_books'>Last</a>";
+                }else {
+                    echo "";
+                }
+
+                ?>
+
             </p>
         </section>
     </div>
 
     <div class="row">
-        <a href="index.php?op=pdf" class="button-primary">Generate PDF</a>
-        <!--<form action="../Views/generatePDF.php">
-            <button type="submit" name="generatePDF">Generate</button>
-        </form>-->
+<!--        <a href="?op=pdf&columnOrder=--><?//= $columnOrder?><!--&orderOption=--><?//= $orderOption?><!--&page=--><?//= $page?><!--" class="button-primary">Generate PDF</a>-->
+        <form method="GET">
+            <input type="text" name="records" placeholder="Number of records to print">
+            <input type="submit" name="generatePDF" value="Generate PDF">
+        </form>
     </div>
 </div>
 

@@ -1,6 +1,7 @@
 <?php
 
 require_once ('Model/Book.php');
+require_once ('Model/Pagination.php');
 
 class Controller
 {
@@ -28,6 +29,7 @@ class Controller
             $previous_page = $page - 1;
             $next_page = $page + 1;
 
+
             $pdo = DB::connect();
 
             $stmt = $pdo->query("SELECT COUNT(*) As total_records FROM books");
@@ -37,15 +39,18 @@ class Controller
             $columnOrder = $_GET['columnOrder'] ?? 'id';
             $orderOption = $_GET['orderOption'] ?? 'ASC';
 
-            if (isset($_GET['order'])) {
+            if (isset($_GET['generatePDF'])) {
 
-                $columnOrder = $_GET['columnOrder'];
-                $orderOption = $_GET['orderOption'];
+                $records = $_GET['records'];
+                if (!isset($_GET['records']) || empty($_GET['records']))
+                    $records = $this->maxRows;
+
+                $this->generatePDF($columnOrder, $orderOption, $page, $records);
             }
 
             //  TODO crear php para mostrar errores
-            if ($page <= 0)
-                die ('Page must be 1 or greater');
+            if ($page <= 0 || $page > $total_number_books)
+                die ('Page number error');
 
             $books = $this->model->getBooks($offset, $this->maxRows, $columnOrder, $orderOption);
 
@@ -146,30 +151,29 @@ class Controller
 
         session_start();
 
-        if (isset($_POST['add'])) {
-            $newBook = new Book(1, $_POST['isbn'], $_POST['title'], $_POST['author'],
-                $_POST['publisher'], $_POST['pages']);
-
-            $this->model->insertBook($newBook);
-            $_SESSION['success'] = 'Book added';
-            $_SESSION['class'] = 'success';
-            $this->redirect('index.php');
-            return;
-
-        }else if (isset($_POST['cancel'])) {
-
-            $this->redirect('index.php');
-            return;
-        }
+//        if (isset($_POST['add'])) {
+//            $newBook = new Book(1, $_POST['isbn'], $_POST['title'], $_POST['author'],
+//                $_POST['publisher'], $_POST['pages']);
+//
+//            $this->model->insertBook($newBook);
+//            $_SESSION['success'] = 'Book added';
+//            $_SESSION['class'] = 'success';
+//            $this->redirect('index.php');
+//            return;
+//
+//        }else if (isset($_POST['cancel'])) {
+//
+//            $this->redirect('index.php');
+//            return;
+//        }
 
         include $_SERVER['DOCUMENT_ROOT'] . '/Views/new.php';
 
     }
 
-    //  TODO Añadir al PDF la página del usuario y el orden
-    public function generatePDF() {
-        $columnOrder = $_GET['columnOrder'] ?? 'title';
-        $orderOption = $_GET['orderOption'] ?? 'ASC';
+    public function generatePDF($columnOrder, $orderOption, $page, $maxRows) {
+
+        $offset = ($page-1) * $this->maxRows;
 
         include $_SERVER['DOCUMENT_ROOT'] . '/Views/generatePDF.php';
     }
@@ -177,5 +181,7 @@ class Controller
     public function redirect($page) {
         header("Location: " . "../" . $page);
     }
+
+
 
 }

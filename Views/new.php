@@ -1,13 +1,40 @@
 <?php
 
-/*if (isset($_POST['add'])) {
-    $newBook = new Book(1, $_POST['isbn'], $_POST['title'], $_POST['author'],
-    $_POST['publisher'], $_POST['pages']);
+if (isset($_SESSION['error'])) {
+    $errorMessage = $_SESSION['error'];
+    unset($_SESSION['error']);
+}
 
-    print_r($newBook);
-    echo $newBook->getAuthor();
+$error = false;
 
-}*/
+if (isset($_POST['add'])) {
+
+    //  TODO Validar inputs
+
+    if (!is_string($_POST['title']) || !is_string($_POST['author']) || !is_string($_POST['publisher'])) {
+        $_SESSION['error'] = 'Title, author or publisher must be string';
+        $error = true;
+    }else if (!is_numeric($_POST['pages'])) {
+        $_SESSION['error'] = 'ISBN and Pages must be numeric';
+        $error = true;
+
+    }
+
+    if ($error) {
+        $this->redirect('index.php?op=new');
+        return;
+    }
+
+//    if (isset($_POST['pages'])) {
+//
+//        $_SESSION['error'] = 'Pages must be numeric';
+//
+//        $this->redirect('index.php?op=new');
+//        return;
+//    }
+
+
+}
 
 ?>
 
@@ -30,6 +57,8 @@
 <div class="container">
     <div class="row">
         <h3>New book</h3>
+
+        <h5><?= $errorMessage?></h5>
 
         <form method="POST">
             <label for="isbn">ISBN</label>
