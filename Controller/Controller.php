@@ -1,7 +1,6 @@
 <?php
 
 require_once ('Model/Book.php');
-require_once ('Model/Pagination.php');
 
 class Controller
 {
@@ -42,27 +41,30 @@ class Controller
             if (isset($_GET['generatePDF'])) {
 
                 $records = $_GET['records'];
-                if (!isset($_GET['records']) || empty($_GET['records']))
+
+                if (!isset($records) || empty($records))
                     $records = $this->maxRows;
 
-                $this->generatePDF($columnOrder, $orderOption, $page, $records);
+                if (!is_numeric($records))
+                    $this->errorPage('Records to print bust be empty or numeric');
+                else
+                    $this->generatePDF($columnOrder, $orderOption, $page, $records);
             }
 
-            //  TODO crear php para mostrar errores
             if ($page <= 0 || $page > $total_number_books)
-                die ('Page number error');
+                $this->errorPage('Invalid page number');
 
             $books = $this->model->getBooks($offset, $this->maxRows, $columnOrder, $orderOption);
 
             include ('Views/booksList.php');
 
         }else if ($id && !$operation) {
-            die('Operation is missing');
+            $this->errorPage('Operation parameter is needed');
 
         }else if (!$id && $operation) {
 
             if ($operation != 'new' && $operation != 'pdf')
-                die('Id is missing');
+                $this->errorPage('ID parameter is needed');
         }
 
         switch ($operation) {
@@ -85,6 +87,10 @@ class Controller
             case 'pdf':
                 $this->generatePDF();
                 break;
+
+            default:
+                $this->errorPage('Page not found');
+                break;
         }
 
     }
@@ -96,14 +102,23 @@ class Controller
         $book = $this->model->getBookByID($id);
 
         if (isset($_POST['edit'])) {
-            $bookEdited = new Book($id, $_POST['isbn'], $_POST['title'], $_POST['author'],
-                $_POST['publisher'], $_POST['pages']);
 
-            $this->model->editBook($bookEdited);
-            $_SESSION['success'] = 'Book edited';
-            $_SESSION['class'] = 'success';
-            $this->redirect('index.php');
-            return;
+            $error = $this->verifyInputs($_POST['isbn'], $_POST['title'], $_POST['author'], $_POST['publisher'], $_POST['pages']);
+
+            if ($error) {
+                $this->redirect("index.php?op=edit&id=$id");
+                return;
+            }else {
+                $bookEdited = new Book($id, $_POST['isbn'], $_POST['title'], $_POST['author'],
+                    $_POST['publisher'], $_POST['pages']);
+
+                $this->model->editBook($bookEdited);
+                $_SESSION['success'] = 'Book edited';
+                $_SESSION['class'] = 'success';
+                $this->redirect('index.php');
+                return;
+            }
+
 
         }else if (isset($_POST['cancel'])) {
 
@@ -151,21 +166,30 @@ class Controller
 
         session_start();
 
-//        if (isset($_POST['add'])) {
-//            $newBook = new Book(1, $_POST['isbn'], $_POST['title'], $_POST['author'],
-//                $_POST['publisher'], $_POST['pages']);
-//
-//            $this->model->insertBook($newBook);
-//            $_SESSION['success'] = 'Book added';
-//            $_SESSION['class'] = 'success';
-//            $this->redirect('index.php');
-//            return;
-//
-//        }else if (isset($_POST['cancel'])) {
-//
-//            $this->redirect('index.php');
-//            return;
-//        }
+        if (isset($_POST['add'])) {
+
+            $error = $this->verifyInputs($_POST['isbn'], $_POST['title'], $_POST['author'], $_POST['publisher'], $_POST['pages']);
+
+            if ($error) {
+                $this->redirect('index.php?op=new');
+                return;
+            }else {
+                $newBook = new Book(1, $_POST['isbn'], $_POST['title'], $_POST['author'],
+                    $_POST['publisher'], $_POST['pages']);
+
+                $this->model->insertBook($newBook);
+                $_SESSION['success'] = 'Book added';
+                $_SESSION['class'] = 'success';
+                $this->redirect('index.php');
+                return;
+            }
+
+
+        }else if (isset($_POST['cancel'])) {
+
+            $this->redirect('index.php');
+            return;
+        }
 
         include $_SERVER['DOCUMENT_ROOT'] . '/Views/new.php';
 
@@ -176,6 +200,30 @@ class Controller
         $offset = ($page-1) * $this->maxRows;
 
         include $_SERVER['DOCUMENT_ROOT'] . '/Views/generatePDF.php';
+    }
+
+    public function verifyInputs($isbn, $title, $author, $publisher, $pages) {
+
+        $error = false;
+
+        if (empty($title) || empty($author) || empty($publisher) || empty($isbn) || empty($pages)) {
+            $_SESSION['error'] = 'All fields required';
+            $error = true;
+        }else if (!is_numeric($pages)) {
+            $_SESSION['error'] = 'Pages must be numeric';
+            $error = true;
+
+        }
+
+        return $error;
+    }
+
+    public function errorPage($error) {
+
+        session_start();
+
+        $_SESSION['errorPage'] = $error;
+        $this->redirect('errorPage.php');
     }
 
     public function redirect($page) {

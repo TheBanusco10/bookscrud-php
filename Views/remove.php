@@ -15,15 +15,15 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container removeContent">
         <div class="row">
             <h3>Confirm remove: <?= $book->title?></h3>
 
             <form method="POST" class="u-full-width">
-                <div>
+                <div class="removeContent">
                     <h5>Are you sure?</h5>
                 </div>
-                <div>
+                <div class="removeContent">
                     <input type="submit" class="button-danger" name="remove" value="Remove">
                     <input type="submit" name="cancel" value="Cancel">
                 </div>
@@ -34,4 +34,4 @@
 
 <?php
 
-include ('footer.php');
+include('Views/footer.php');

@@ -5,37 +5,6 @@ if (isset($_SESSION['error'])) {
     unset($_SESSION['error']);
 }
 
-$error = false;
-
-if (isset($_POST['add'])) {
-
-    //  TODO Validar inputs
-
-    if (!is_string($_POST['title']) || !is_string($_POST['author']) || !is_string($_POST['publisher'])) {
-        $_SESSION['error'] = 'Title, author or publisher must be string';
-        $error = true;
-    }else if (!is_numeric($_POST['pages'])) {
-        $_SESSION['error'] = 'ISBN and Pages must be numeric';
-        $error = true;
-
-    }
-
-    if ($error) {
-        $this->redirect('index.php?op=new');
-        return;
-    }
-
-//    if (isset($_POST['pages'])) {
-//
-//        $_SESSION['error'] = 'Pages must be numeric';
-//
-//        $this->redirect('index.php?op=new');
-//        return;
-//    }
-
-
-}
-
 ?>
 
 <!doctype html>
@@ -58,7 +27,7 @@ if (isset($_POST['add'])) {
     <div class="row">
         <h3>New book</h3>
 
-        <h5><?= $errorMessage?></h5>
+        <h5 class="error"><?= $errorMessage?></h5>
 
         <form method="POST">
             <label for="isbn">ISBN</label>
@@ -85,6 +54,6 @@ if (isset($_POST['add'])) {
 
 <?php
 
-include ('footer.php');
+include('Views/footer.php');
 
 ?>

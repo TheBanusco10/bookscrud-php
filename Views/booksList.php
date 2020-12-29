@@ -4,9 +4,7 @@ session_start();
 
 if (isset($_SESSION['success'])) {
     $message = $_SESSION['success'];
-    $class = $_SESSION['class'];
     unset($_SESSION['success']);
-    unset($_SESSION['class']);
 }
 
 $columns = ['id', 'isbn', 'title', 'author', 'publisher', 'pages'];
@@ -60,7 +58,7 @@ $columns = ['id', 'isbn', 'title', 'author', 'publisher', 'pages'];
         </form>
     </div>
     <div class="row">
-        <h5 class="<?= $class?>"><?= $message?></h5>
+        <h5 class="success"><?= $message?></h5>
 
             <?php
 
@@ -78,7 +76,6 @@ $columns = ['id', 'isbn', 'title', 'author', 'publisher', 'pages'];
                 <table class="u-full-width">
                     <thead>
                     <tr>
-                        <th>ID</th>
                         <th>ISBN</th>
                         <th>Título</th>
                         <th>Autor</th>
@@ -93,7 +90,6 @@ $columns = ['id', 'isbn', 'title', 'author', 'publisher', 'pages'];
                     foreach ($books as $book) {
                         echo "<tr>";
 
-                        echo "<td>$book->id</td>";
                         echo "<td>$book->isbn</td>";
                         echo "<td>$book->title</td>";
                         echo "<td>$book->author</td>";
@@ -149,6 +145,7 @@ $columns = ['id', 'isbn', 'title', 'author', 'publisher', 'pages'];
 <!--        <a href="?op=pdf&columnOrder=--><?//= $columnOrder?><!--&orderOption=--><?//= $orderOption?><!--&page=--><?//= $page?><!--" class="button-primary">Generate PDF</a>-->
         <form method="GET">
             <input type="text" name="records" placeholder="Number of records to print">
+            <input type="hidden" name="page" value="<?= $page?>">
             <input type="submit" name="generatePDF" value="Generate PDF">
         </form>
     </div>
@@ -156,7 +153,7 @@ $columns = ['id', 'isbn', 'title', 'author', 'publisher', 'pages'];
 
 <?php
 
-include ('footer.php');
+include('Views/footer.php');
 
 ?>
 

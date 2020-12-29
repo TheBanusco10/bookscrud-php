@@ -1,5 +1,9 @@
 <?php
 
+if (isset($_SESSION['error'])) {
+    $errorMessage = $_SESSION['error'];
+    unset($_SESSION['error']);
+}
 
 ?>
 
@@ -22,6 +26,8 @@
     <div class="container">
         <div class="row">
             <h3>Editing <?= $book->title?></h3>
+
+            <h5 class="error"><?= $errorMessage?></h5>
 
             <form method="POST">
                 <label for="isbn">ISBN</label>
@@ -48,6 +54,6 @@
 
 <?php
 
-include ('footer.php');
+include('Views/footer.php');
 
 ?>

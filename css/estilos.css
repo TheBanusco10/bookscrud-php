@@ -38,6 +38,10 @@ h1, h3 {
     color: limegreen;
 }
 
+.error {
+    color: red;
+}
+
 .button-danger {
 
     color: #FFF !important;
