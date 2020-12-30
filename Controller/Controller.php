@@ -15,7 +15,6 @@ class Controller
     {
         $this->model = $model;
     }
-
     public function invoke() {
 
         $operation = $_GET['op'] ?? null;
@@ -124,12 +123,10 @@ class Controller
                 $this->generatePDF();
                 break;
 
-            default:
-                $this->errorPage('Page not found');
-                break;
         }
 
     }
+
 
     public function editBook($id) {
 
