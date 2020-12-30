@@ -4,9 +4,6 @@ require_once('DB.php');
 
 class Model {
 
-    private $books = [];
-    private $db;
-
     /**
      * @return array
      */
@@ -46,6 +43,7 @@ class Model {
         return $stmt->fetch(PDO::FETCH_OBJ);
 
 
+
     }
 
     public function editBook(Book $book) {
@@ -64,6 +62,9 @@ class Model {
             ':id'=>htmlspecialchars($book->getId())
         ));
 
+        $pdo = null;
+
+
     }
 
     public function removeBook($id) {
@@ -75,6 +76,9 @@ class Model {
         $stmt->execute(array(
             ':id'=>htmlspecialchars($id)
         ));
+
+        $pdo = null;
+
 
     }
 
@@ -91,6 +95,8 @@ class Model {
             ':publisher'=>htmlspecialchars($book->getPublisher()),
             ':pages'=>htmlspecialchars($book->getPages())
         ));
+
+        $pdo = null;
 
     }
 

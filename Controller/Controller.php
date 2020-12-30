@@ -77,7 +77,18 @@ class Controller
                 break;
 
             case 'show':
-                $this->showBook($id);
+                $pdo = DB::connect();
+
+                $stmt = $pdo->query("SELECT COUNT(*) As total_records FROM books");
+
+                if ($id != null && ($id < 1 || $id > $stmt->fetch(5)->total_records)) {
+                    $this->errorPage('Book not found');
+                }else {
+
+                    $this->showBook($id);
+                }
+
+                $pdo = null;
                 break;
 
             case 'new':
