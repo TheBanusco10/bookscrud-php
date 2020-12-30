@@ -69,11 +69,36 @@ class Controller
 
         switch ($operation) {
             case 'edit':
-                $this->editBook($id);
+                $pdo = DB::connect();
+
+                $stmt = $pdo->query("SELECT COUNT(*) As total_records FROM books");
+
+                if ($id != null && ($id < 1 || $id > $stmt->fetch(5)->total_records)) {
+                    $this->errorPage('Book not found');
+
+                }else {
+
+                    $this->editBook($id);
+                }
+
+                $pdo = null;
+
                 break;
 
             case 'remove':
-                $this->removeBook($id);
+                $pdo = DB::connect();
+
+                $stmt = $pdo->query("SELECT COUNT(*) As total_records FROM books");
+
+                if ($id != null && ($id < 1 || $id > $stmt->fetch(5)->total_records)) {
+                    $this->errorPage('Book not found');
+
+                }else {
+                    $this->removeBook($id);
+                }
+
+                $pdo = null;
+
                 break;
 
             case 'show':
