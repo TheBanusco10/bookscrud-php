@@ -142,10 +142,11 @@ $columns = ['id', 'isbn', 'title', 'author', 'publisher', 'pages'];
     </div>
 
     <div class="row">
-<!--        <a href="?op=pdf&columnOrder=--><?//= $columnOrder?><!--&orderOption=--><?//= $orderOption?><!--&page=--><?//= $page?><!--" class="button-primary">Generate PDF</a>-->
         <form method="GET">
             <input type="text" name="records" placeholder="Number of records to print">
             <input type="hidden" name="page" value="<?= $page?>">
+            <input type="hidden" name="columnOrder" value="<?= $columnOrder?>">
+            <input type="hidden" name="orderOption" value="<?= $orderOption?>">
             <input type="submit" name="generatePDF" value="Generate PDF">
         </form>
     </div>
